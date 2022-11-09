@@ -12,3 +12,20 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+def menu():
+    print("presione 1 para  cargar datos de su mascota")
+    print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
+    print("presione 3 para agregar mascota")
+    print("presione 4 para buscar mascota")
+    print("presione 5 para ordenar mascota")
+    print("presione 6 para guardar mascotas ")
+    opcion=int(input("ingrese una opcion correcta"))
+    if opcion==1:
+        carga()
+
+    if
+    if
+    if
+    if
+    elif opcion==2:
+        modicar(datos)
