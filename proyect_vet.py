@@ -23,12 +23,16 @@ def menu():
     if opcion==1:
         carga()
 
-    if
-    if
-    if
-    if
-    elif opcion==2:
-        modicar(datos)
+    if opcion==2:
+        mostrar()
+    if opcion==3:
+        agregar()
+    if opcion==4:
+        buscar()
+    if ordenar==5:
+        cargar()
+    elif opcion==6:
+        guardar(datos)
 def carga():
     datos={}
     continua="s"
@@ -44,6 +48,16 @@ def carga():
             menu()      
     return(datos)
    
+
+def mostrar():
+    
+def agregar():
+    
+def buscar():
+    
+def cargar():
+    
+def guardar():
 
 
 def modicar(datos):
