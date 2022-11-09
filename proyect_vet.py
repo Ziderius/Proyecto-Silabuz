@@ -12,3 +12,19 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+
+import pandas
+#instalar el módulo: pip install pandas
+import csv
+import time
+
+class Registro:
+    def __init__(self, reg = "registro.csv"):
+        self.reg = reg
+        self.listas = []
+        with open(self.reg, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                self.listas.append(row)
+            self.fieldnames = ['nombre', 'nacimiento', 'raza', 'dueño', 'dni']
+        
