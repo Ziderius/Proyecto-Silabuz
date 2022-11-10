@@ -13,9 +13,11 @@ Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clas
 '''
 
 import csv
+import pandas as pd
+# módulo pandas: pip install pandas
 import time
 from tqdm import tqdm 
-    #módulo tqdm progress bar: pip install tqdm
+# módulo tqdm progress bar: pip install tqdm
 
 # Abrir y leer csv
 class Veterinaria:
@@ -26,21 +28,27 @@ class Veterinaria:
             reader = csv.DictReader(file)
             for row in reader:
                 self.listas.append(row)
-            self.fieldnames = ['nombre', 'nacimiento', 'raza', 'dueño', 'dni']          
+            self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']          
 
     # Menú de opciones
     def menu(self):
         opc = 0
-        while opc != 1:
+        while opc != 3:
             print('''
             ¡Bienvenido al Sistema de Registro Veterinario!
             Menú de opciones
             1 : Cargar archivo de registro.
+            2 : Mostrar datos de mascotas registradas.
+            3 : Añadir nuevo registro de mascota.
             ''')
             time.sleep(1)
             opc = int(input("Introduzca su opción: "))
             if opc == 1:
-             self.carga()
+                self.carga()
+            if opc == 2:
+                self.datos()
+            if opc == 3:
+                self.agregar()
 
     # Cargardo archivo
     def carga(self):
@@ -53,6 +61,43 @@ class Veterinaria:
             pbar.set_description("Cargando archivo...")
         pbar.close()
         print("Archivo cargado con éxito.\n")
+    
+    # Mostrar y listar datos
+    def datos(self):
+        print("\nIniciando lista de registro de mascotas...\n")
+        time.sleep(2)
+        mascotas = pd.read_csv(self.reg, encoding="utf-8")
+        print(mascotas)
+        time.sleep(1)
+        print("\nProceso finalizado.")
+    
+    # Añadir mascotas con los datos del registro
+    def agregar(self):
+        print("\nIniciando opción de añadir mascota...")
+        time.sleep(2)
+        print("Por favor, escriba lo que el sistema le solicite:\n")
+        time.sleep(2)
+        count = len(self.listas)
+        nombre = input("Ingrese nombre de la mascota: ")
+        time.sleep(1)
+        nacimiento = input("Ingrese fecha de nacimiento (DD/MM/AA): ")
+        time.sleep(1)
+        raza = input("Ingrese raza de la mascota: ")
+        time.sleep(1)
+        own = input("Ingrese nombre del dueño: ")
+        time.sleep(1)
+        dni = input("Ingrese número de DNI del dueño: ")
+        while dni.isdigit() != True:
+            print("El dato ingresado es incorrecto, vuelva a intentarlo.")
+            dni = input("Ingrese número de DNI del dueño: ")
+        time.sleep(1)
+        print("\nDatos añadidos correctamente.")
+        agr = {'Nombre': nombre.capitalize(), 'Nacimiento': nacimiento, "Raza": raza.capitalize(), "Dueño": own.capitalize(), "DNI": dni}
+        self.listas.append(agr)
+        with open(self.reg, 'w', encoding="utf-8", newline='') as file:
+            agrega = csv.DictWriter(file, fieldnames=self.fieldnames)
+            agrega.writeheader()
+            agrega.writerows(self.listas)
 
 Vet = Veterinaria()
 Vet.menu()
