@@ -12,14 +12,38 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+import random  # Importamos la librería random
+import sys  #para finalizar el juego
+import time  #para definir tiempo
+#colores
+BLACK = '\033[30m'
+RED = '\033[31m'
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+BLUE = '\033[34m'
+MAGENTA = '\033[35m'
+CYAN = '\033[36m'
+WHITE = '\033[37m'
+RESET = '\033[39m'
+time.sleep(1)  # Espera 1 segundos antes de continuar.
+print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
+print("=== Elija una de las opciones diponibles ===\n" +RESET)
+time.sleep(1)  # Espera 1 segundos antes de continuar.
 def menu():
-    print("presione 1 para  cargar datos de su mascota")
+    print(YELLOW+ "presione 1 para  cargar datos de su mascota ")
     print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
     print("presione 3 para agregar mascota")
     print("presione 4 para buscar mascota")
     print("presione 5 para ordenar mascota")
-    print("presione 6 para guardar mascotas ")
-    opcion=int(input("ingrese una opcion correcta"))
+    print("presione 6 para guardar mascotas \n" +RESET)
+    opcion = int(input("Elija una opcion correcta: "))
+    while  opcion not in (1,2,3,4,5,6):
+        opcion = input("la opcion no existe, elija una opcion correcta: ")
+    if opcion == 1:
+        print("te llamas pedro")
+        #carga()
+menu()
+'''
     if opcion==1:
         carga()
 
@@ -65,3 +89,4 @@ def modicar(datos):
     if legajo in datos:
         sueldo=int(input("ingrese el nuevo sueldo"))
         datos[2]=sueldo
+'''
