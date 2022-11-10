@@ -10,15 +10,15 @@ Opción 6: Guardar mascotas en archivo de disco duro (.txt o csv)
 
 Se solicita escribir un programa en Python que permita realizar las gestiones descritas en las opciones líneas arriba. 
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
-
 '''
 
-import pandas
-#instalar el módulo: pip install pandas
 import csv
 import time
+from tqdm import tqdm 
+    #módulo tqdm progress bar: pip install tqdm
 
-class Registro:
+# Abrir y leer csv
+class Veterinaria:
     def __init__(self, reg = "registro.csv"):
         self.reg = reg
         self.listas = []
@@ -26,5 +26,33 @@ class Registro:
             reader = csv.DictReader(file)
             for row in reader:
                 self.listas.append(row)
-            self.fieldnames = ['nombre', 'nacimiento', 'raza', 'dueño', 'dni']
-        
+            self.fieldnames = ['nombre', 'nacimiento', 'raza', 'dueño', 'dni']          
+
+    # Menú de opciones
+    def menu(self):
+        opc = 0
+        while opc != 1:
+            print('''
+            ¡Bienvenido al Sistema de Registro Veterinario!
+            Menú de opciones
+            1 : Cargar archivo de registro.
+            ''')
+            time.sleep(1)
+            opc = int(input("Introduzca su opción: "))
+            if opc == 1:
+             self.carga()
+
+    # Cargardo archivo
+    def carga(self):
+        print("\nIniciando carga, por favor, espere.")
+        data =[]
+        pbar = tqdm(total=100)
+        for i in range(20):
+            time.sleep(0.1)
+            pbar.update(5)
+            pbar.set_description("Cargando archivo...")
+        pbar.close()
+        print("Archivo cargado con éxito.\n")
+
+Vet = Veterinaria()
+Vet.menu()
