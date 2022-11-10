@@ -12,3 +12,5 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+
+print("prueba")
