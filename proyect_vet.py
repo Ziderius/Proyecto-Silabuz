@@ -1,17 +1,3 @@
-'''
-En una veterinaria se requiere una pequeña interfaz por línea de comandos que permita:
-
-Opción 1: Cargar un archivo csv con datos de 5 mascotas. Tras una persona seleccionar esta opción, debe el sistema indicar un mensaje "Se cargaron los datos de 5 mascotas".
-Opción 2: Mostrar datos de mascotas cargadas en el sistema.
-Opción 3: Agregar mascota. En esta opción el sistema solicita los datos de la mascota para su registro.
-Opción 4: Buscar mascota. Al seleccionar esta opción, el sistema indicar subopciones de búsqueda como: nombre mascota, dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
-Opción 5: Ordenar mascota. Al seleccionar esta opción, el sistema indicar subopciones de ordenamiento como: nombre mascota, dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
-Opción 6: Guardar mascotas en archivo de disco duro (.txt o csv)
-
-Se solicita escribir un programa en Python que permita realizar las gestiones descritas en las opciones líneas arriba. 
-Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
-'''
-
 import csv
 import pandas as pd
 # módulo pandas: pip install pandas
@@ -33,7 +19,7 @@ class Veterinaria:
     # Menú de opciones
     def menu(self):
         opc = 0
-        while opc != 3:
+        while opc != 5:
             print('''
             ¡Bienvenido al Sistema de Registro Veterinario!
             Menú de opciones
@@ -49,11 +35,16 @@ class Veterinaria:
                 self.datos()
             if opc == 3:
                 self.agregar()
+            if opc == 4:
+                self.busq()
+            if opc == 5:
+                self.salir()
+            else:
+                exit()
 
     # Cargardo archivo
     def carga(self):
         print("\nIniciando carga, por favor, espere.")
-        data =[]
         pbar = tqdm(total=100)
         for i in range(20):
             time.sleep(0.1)
@@ -71,13 +62,12 @@ class Veterinaria:
         time.sleep(1)
         print("\nProceso finalizado.")
     
-    # Añadir mascotas con los datos del registro
+    # Añadir mascotas con datos del registro
     def agregar(self):
         print("\nIniciando opción de añadir mascota...")
         time.sleep(2)
         print("Por favor, escriba lo que el sistema le solicite:\n")
         time.sleep(2)
-        count = len(self.listas)
         nombre = input("Ingrese nombre de la mascota: ")
         time.sleep(1)
         nacimiento = input("Ingrese fecha de nacimiento (DD/MM/AA): ")
@@ -87,17 +77,37 @@ class Veterinaria:
         own = input("Ingrese nombre del dueño: ")
         time.sleep(1)
         dni = input("Ingrese número de DNI del dueño: ")
+
         while dni.isdigit() != True:
-            print("El dato ingresado es incorrecto, vuelva a intentarlo.")
+            print("El dato es errado, vuelva a intentarlo.")
             dni = input("Ingrese número de DNI del dueño: ")
+            
         time.sleep(1)
         print("\nDatos añadidos correctamente.")
         agr = {'Nombre': nombre.capitalize(), 'Nacimiento': nacimiento, "Raza": raza.capitalize(), "Dueño": own.capitalize(), "DNI": dni}
         self.listas.append(agr)
         with open(self.reg, 'w', encoding="utf-8", newline='') as file:
-            agrega = csv.DictWriter(file, fieldnames=self.fieldnames)
-            agrega.writeheader()
-            agrega.writerows(self.listas)
+            escr = csv.DictWriter(file, fieldnames=self.fieldnames)
+            escr.writeheader()
+            escr.writerows(self.listas)
+  
+    # Búsqueda de datos de mascotas según registro
+    def busq(self):
+        print("Iniciando submenú de búsqueda...")
+        time.sleep(2)
+        opc_busq = 0
+        registro = self.reg
+        while opc_busq != 1:
+            print("1 : Nombre de mascota.")
+        opc_busq = input("Ingrese su opción: ")
+        if opc_busq == "1":
+            resul_opc = input("Ingrese nombre de la mascota: \n")
+            for i in registro:
+                if i["Nombre"] == resul_opc:
+                    print(f"Nacimiento: {i['Nacimiento']}")
 
-Vet = Veterinaria()
-Vet.menu()
+    def salir(self):
+        pass
+
+vet = Veterinaria()
+vet.menu()
