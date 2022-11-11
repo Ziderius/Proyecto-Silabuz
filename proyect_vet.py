@@ -19,13 +19,17 @@ class Veterinaria:
     # Menú de opciones
     def menu(self):
         opc = 0
-        while opc != 5:
+        while opc != 7:
             print('''
             ¡Bienvenido al Sistema de Registro Veterinario!
             Menú de opciones
             1 : Cargar archivo de registro.
             2 : Mostrar datos de mascotas registradas.
             3 : Añadir nuevo registro de mascota.
+            4 : Búsqueda por datos de registro.
+            5 : Ordenar mascotas por datos de registro. (Noup)
+            6 : Guardar los datos. (Noup)
+            7 : Salir. 
             ''')
             time.sleep(1)
             opc = int(input("Introduzca su opción: "))
@@ -37,10 +41,8 @@ class Veterinaria:
                 self.agregar()
             if opc == 4:
                 self.busq()
-            if opc == 5:
+            if opc == 7:
                 self.salir()
-            else:
-                exit()
 
     # Cargardo archivo
     def carga(self):
@@ -52,6 +54,8 @@ class Veterinaria:
             pbar.set_description("Cargando archivo...")
         pbar.close()
         print("Archivo cargado con éxito.\n")
+        print("Regresando al menú principal.")
+        time.sleep(2)
     
     # Mostrar y listar datos
     def datos(self):
@@ -59,8 +63,10 @@ class Veterinaria:
         time.sleep(2)
         mascotas = pd.read_csv(self.reg, encoding="utf-8")
         print(mascotas)
-        time.sleep(1)
+        time.sleep(2)
         print("\nProceso finalizado.")
+        print("Regresando al menú principal.")
+        time.sleep(2)
     
     # Añadir mascotas con datos del registro
     def agregar(self):
@@ -84,6 +90,8 @@ class Veterinaria:
             
         time.sleep(1)
         print("\nDatos añadidos correctamente.")
+        print("Regresando al menú principal.")
+        time.sleep(2)
         agr = {'Nombre': nombre.capitalize(), 'Nacimiento': nacimiento, "Raza": raza.capitalize(), "Dueño": own.capitalize(), "DNI": dni}
         self.listas.append(agr)
         with open(self.reg, 'w', encoding="utf-8", newline='') as file:
@@ -96,15 +104,26 @@ class Veterinaria:
         print("Iniciando submenú de búsqueda...")
         time.sleep(2)
         opc_busq = 0
-        registro = self.reg
         while opc_busq != 1:
-            print("1 : Nombre de mascota.")
-        opc_busq = input("Ingrese su opción: ")
-        if opc_busq == "1":
-            resul_opc = input("Ingrese nombre de la mascota: \n")
-            for i in registro:
-                if i["Nombre"] == resul_opc:
-                    print(f"Nacimiento: {i['Nacimiento']}")
+            print('''
+            Submenú de búsqueda por datos.
+            1 : Búsqueda por nombre de mascota.
+            ''')
+            opc_busq = input("Introduzca su opción: ")
+
+            if opc_busq == "1":
+                resul_opc = input("Ingrese nombre de mascota: ")
+                for k in self.listas:
+                    if k['Nombre'] == resul_opc.capitalize():
+                        print("Datos encontrados.")
+                        print("Nombre:", k['Nacimiento'])
+                        time.sleep(2)
+                        print("Regresando al menú principal.")
+                    else:
+                        print("Mascota no registrada.")
+                        print("Regresando al menú principal.")
+                        time.sleep(2)
+            break
 
     def salir(self):
         pass
