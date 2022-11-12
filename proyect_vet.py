@@ -22,7 +22,7 @@ class Veterinaria:
             print('''
             ¡Bienvenido al Sistema de Registro Veterinario!
             5 : Ordenar mascotas por datos de registro.
-            6 : Guardar los datos.
+            6 : Crear una copia del registro.
             7 : Salir. 
             ''')
             time.sleep(0)
@@ -30,13 +30,13 @@ class Veterinaria:
             if opc == 5:
                 self.busq()
             if opc == 6:
-                self.cump()
+                self.guardar()
             if opc == 7:
                 self.salir()
-            else:
-                print("Elección no válida. Intente de nuevo.")
-                time.sleep(2) 
-                return self.menu()
+        else:
+            print("Elección no válida. Intente de nuevo.")
+            time.sleep(2) 
+            return self.menu()
 
     # Submenú de ordenamiento por lo que el usuario requiera
     def busq(self):
@@ -104,6 +104,18 @@ class Veterinaria:
 
         else:
             print("Elección incorrecta, vuelva a intentarlo.")
+
+    # Crear un nuevo registro para la veterinaria
+    def guardar(self):
+        my_path = 'nuevo_registro.csv'
+        with open(my_path, 'w', encoding="utf-8",newline='') as newReg:
+            writer = csv.DictWriter(newReg,fieldnames = self.fieldnames,delimiter=',')
+            writer.writeheader()
+            writer.writerows(self.listas)
+        newReg.close()
+        time.sleep(2.5)
+        print("\nSe ha creado un nuevo registro en el sistema.")
+        time.sleep(1)
 
     # Opción de salir del programa 
     def salir(self):
