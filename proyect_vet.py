@@ -12,5 +12,35 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+from time import sleep
+from tqdm import tqdm
 
-print("prueba")
+class veterinaria:
+    def menu(self):
+        opcion = 0
+        while opcion != 2:
+            print("1.Cargar archivo: ")
+            opcion = int(input("Elige tu opción: "))
+            if opcion == 1:
+                self.cargar()
+            if opcion == 2:
+                self.mostrar()
+
+    def cargar(self):
+ 
+        print("Cargando datos...")
+
+        for i in tqdm(range(10)):
+            sleep(1)
+
+        print("Se han cargado los datos de 6 mascotas.")
+
+ #   def mostrar(self):
+
+
+
+
+
+
+vet = veterinaria()
+vet.menu()
