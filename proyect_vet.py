@@ -1,10 +1,8 @@
 import csv
-import pandas as pd
-from datetime import datetime, date
-# módulo pandas: pip install pandas
+from datetime import datetime
 import time
     
-# Abrir y leer csv
+# Define clase, abrir y leer csv
 class Veterinaria:
     def __init__(self, reg = "registro.csv"):
         self.reg = reg
@@ -40,6 +38,7 @@ class Veterinaria:
 
     # Submenú de ordenamiento por lo que el usuario requiera
     def busq(self):
+        datosVet = self.listas
         opc_busq = 0
         while opc_busq != 7:
             time.sleep(1.5)
@@ -57,7 +56,6 @@ class Veterinaria:
             time.sleep(2)
 
             if opc_busq == 1:
-                datosVet = self.listas
                 datosVet.sort(key = lambda x:x['Nombre'])
                 print("\nResultados del ordenamiento por Nombre de mascota: ")
                 for a in datosVet:
@@ -65,7 +63,6 @@ class Veterinaria:
                     print(f"\n⇢  Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
 
             if opc_busq == 2:
-                datosVet = self.listas
                 edMas = sorted(datosVet, key = lambda t: datetime.strptime(t['Nacimiento'], "%d/%m/%Y"))
                 print("\nResultados del ordenamiento por Edad de mascota: ")
                 for b in edMas:
@@ -73,7 +70,6 @@ class Veterinaria:
                     print(f"\n⇢  Nombre: {b['Nombre']} ▸ Nacimiento: {b['Nacimiento']} ▸ Raza: {b['Raza']} ▸ Dueño: {b['Dueño']} ▸ DNI: {b['DNI']}")
 
             if opc_busq == 3:
-                datosVet = self.listas
                 datosVet.sort(key = lambda x:x['Raza'])
                 print("\nResultados del ordenamiento por Raza de mascota: ")                
                 for c in datosVet:
@@ -81,7 +77,6 @@ class Veterinaria:
                     print(f"\n⇢  Nombre: {c['Nombre']} ▸ Nacimiento: {c['Nacimiento']} ▸ Raza: {c['Raza']} ▸ Dueño: {c['Dueño']} ▸ DNI: {c['DNI']}")
             
             if opc_busq == 4:
-                datosVet = self.listas
                 datosVet.sort(key = lambda x:x['Dueño'])
                 print("\nResultados del ordenamiento por Dueño de mascota: ")                
                 for d in datosVet:
@@ -89,7 +84,6 @@ class Veterinaria:
                     print(f"\n⇢  Nombre: {d['Nombre']} ▸ Nacimiento: {d['Nacimiento']} ▸ Raza: {d['Raza']} ▸ Dueño: {d['Dueño']} ▸ DNI: {d['DNI']}")
             
             if opc_busq == 5:
-                datosVet = self.listas
                 datosVet.sort(key = lambda x:x['DNI'])
                 print("\nResultados del ordenamiento por DNI del dueño: ")
                 for e in datosVet:
@@ -105,16 +99,16 @@ class Veterinaria:
         else:
             print("Elección incorrecta, vuelva a intentarlo.")
 
-    # Crear un nuevo registro para la veterinaria
+    # Crear una copia del registro veterinario
     def guardar(self):
-        my_path = 'nuevo_registro.csv'
+        my_path = 'registro_2.csv'
         with open(my_path, 'w', encoding="utf-8",newline='') as newReg:
             writer = csv.DictWriter(newReg,fieldnames = self.fieldnames,delimiter=',')
             writer.writeheader()
             writer.writerows(self.listas)
         newReg.close()
         time.sleep(2.5)
-        print("\nSe ha creado un nuevo registro en el sistema.")
+        print("\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv")
         time.sleep(1)
 
     # Opción de salir del programa 
