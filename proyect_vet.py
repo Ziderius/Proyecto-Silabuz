@@ -15,6 +15,7 @@ Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clas
 import random  # Importamos la librería random
 import sys  #para finalizar el juego
 import time  #para definir tiempo
+from csv import writer
 #colores
 BLACK = '\033[30m'
 RED = '\033[31m'
@@ -37,12 +38,57 @@ def menu():
     print("presione 5 para ordenar mascota")
     print("presione 6 para guardar mascotas \n" +RESET)
     opcion = int(input("Elija una opcion correcta: "))
-    while  opcion not in (1,2,3,4,5,6):
-        opcion = input("la opcion no existe, elija una opcion correcta: ")
-    if opcion == 1:
-        print("te llamas pedro")
-        #carga()
-menu()
+    while opcion not in (1,2,3,4,5,6):
+            opcion = input("la opcion no existe, elija una opcion correcta: ")
+    if opcion == 3:
+       agregar_mascota()
+    if opcion == 4:
+        buscar_mascota()
+def agregar_mascota():
+    print("Necesitamos los siguientes datos de la mascota para su registro")
+    nombre_mascota=input("Nombre mascota: ")
+    nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento"
+                    "(Separados por un guion slash / ): ")
+    raza_mascota=input("raza Mascota: ")
+    nombre_dueño=input("nombre del dueño: ")
+    identificacion_Dni=int(input("identificacion: ")[0:8])
+    list_add = [nombre_mascota,nacimiento_mascota,raza_mascota,nombre_dueño,identificacion_Dni]
+    #agregar datos al archivo CSV
+    #csvwriter_object.writerow(list_add)
+    with open('registro.csv', 'a', encoding= "utf-8",newline='') as f_object:  
+    # Pass the CSV  file object to the writer() function
+        writer_object = writer(f_object)
+    # Result - a writer object
+    # Pass the data in the list as an argument into the writerow() function
+        writer_object.writerow(list_add)  
+    # Close the file object
+        f_object.close()
+def buscar_mascota():
+    print("1. Buscar nombre de mascota")
+    print("2. Buscar dueño de mascota")
+    print("3. Buscar raza de la mascota")
+    print("4. Buscar edad de mascota")
+    print("5. Buscar por DNI del dueño")
+    if opcion==1:
+    
+    if opcion==2:
+        
+    if opcion==3:
+        
+    if opcion==4:
+        
+    if ordenar==5:
+
+'''
+Opción 4: Buscar mascota. Al seleccionar esta opción, el sistema indicar subopciones de búsqueda como: nombre mascota, 
+dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
+
+'''
+
+    
+
+
+ 
 '''
     if opcion==1:
         carga()
