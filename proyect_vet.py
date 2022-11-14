@@ -1,10 +1,11 @@
 import pandas as pd
 import csv
-import random  # Importamos la librería random
-import sys  #para finalizar el juego
-import time  #para definir tiempo
+from time import sleep, time
 from csv import writer
-#colores
+from datetime import datetime
+from tqdm import tqdm
+
+# Colores
 BLACK = '\033[30m'
 RED = '\033[31m'
 GREEN = '\033[32m'
@@ -15,35 +16,9 @@ CYAN = '\033[36m'
 WHITE = '\033[37m'
 RESET = '\033[39m'
 
-
-time.sleep(1)  # Espera 1 segundos antes de continuar.
-print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
-print("=== Elija una de las opciones diponibles ===\n" +RESET)
-time.sleep(1)  # Espera 1 segundos antes de continuar.
-def menu():
-    print(YELLOW+ "presione 1 para  cargar datos de su mascota ")
-    print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
-    print("presione 3 para agregar mascota")
-    print("presione 4 para buscar mascota")
-    print("presione 5 para ordenar mascota")
-    print("presione 6 para guardar mascotas \n" +RESET)
-    opcion = int(input("Elija una opcion correcta: "))
-    while opcion not in (1,2,3,4,5,6):
-            opcion = input("la opcion no existe, elija una opcion correcta: ")
-    if opcion == 3:
-        agregar_mascota()
-    if opcion == 4:
-        buscar_mascota()
-
-
-import csv
-from datetime import datetime
-import pandas as pd
-from tqdm import tqdm
-import time
-from time import sleep
-    
-# Define clase, abrir y leer csv
+<<<<<<< HEAD
+=======
+# Programa 
 class Veterinaria:
     def __init__(self, reg = "registro.csv"):
         self.reg = reg
@@ -53,7 +28,27 @@ class Veterinaria:
             for row in reader:
                 self.listas.append(row)
             self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
-   
+>>>>>>> b413c384a7cb1f7a4ea95f41ad05d9f4fd7d082c
+
+    time.sleep(1)  # Espera 1 segundos antes de continuar.
+    print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
+    print("=== Elija una de las opciones diponibles ===\n" +RESET)
+    time.sleep(1)  # Espera 1 segundos antes de continuar.
+    def menu():
+        print(YELLOW+ "presione 1 para  cargar datos de su mascota ")
+        print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
+        print("presione 3 para agregar mascota")
+        print("presione 4 para buscar mascota")
+        print("presione 5 para ordenar mascota")
+        print("presione 6 para guardar mascotas \n" +RESET)
+    opcion = int(input("Elija una opcion correcta: "))
+    while opcion not in (1,2,3,4,5,6):
+            opcion = input("la opcion no existe, elija una opcion correcta: ")
+    if opcion == 3:
+        agregar_mascota()
+    if opcion == 4:
+        buscar_mascota()
+
     # Menú de opciones
     def menu(self):
         opc = 0
