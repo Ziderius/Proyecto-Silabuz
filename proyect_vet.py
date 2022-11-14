@@ -112,20 +112,14 @@ class Veterinaria:
         sleep(1)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
-<<<<<<< HEAD
             buscar = input('buscar: ')
             encontrar = archivo.query('Nombre == @buscar ')
-=======
-            buscar = input('Buscar: ')
-            encontrar = archivo.query('Nombre == @buscar')
->>>>>>> e286c13d37f4f4c27fc2594b816600afec76809f
             if encontrar.empty:
                 sleep(1.5)
                 print("No se encontraron datos.")
                 sleep(2.5)
             else :
                 print(encontrar)
-<<<<<<< HEAD
         if opcion_2 == 2:
             buscar = input('buscar: ')
             encontrar = archivo.query('Nacimiento == @buscar ')
@@ -154,10 +148,6 @@ class Veterinaria:
                 print("No se encontraron datos similares")
             else :
                 print(encontrar)  
-=======
-                sleep(2.5)
-        
->>>>>>> e286c13d37f4f4c27fc2594b816600afec76809f
     # Submenú de ordenamiento por lo que el usuario requiera
     def ordern(self):
         datosVet = self.listas
