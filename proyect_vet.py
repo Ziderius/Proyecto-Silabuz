@@ -1,14 +1,3 @@
-'''
-En una veterinaria se requiere una pequeña interfaz por línea de comandos que permita:
-Opción 1: Cargar un archivo csv con datos de 5 mascotas. Tras una persona seleccionar esta opción, debe el sistema indicar un mensaje "Se cargaron los datos de 5 mascotas".
-Opción 2: Mostrar datos de mascotas cargadas en el sistema.
-Opción 3: Agregar mascota. En esta opción el sistema solicita los datos de la mascota para su registro.
-Opción 4: Buscar mascota. Al seleccionar esta opción, el sistema indicar subopciones de búsqueda como: nombre mascota, dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
-Opción 5: Ordenar mascota. Al seleccionar esta opción, el sistema indicar subopciones de ordenamiento como: nombre mascota, dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
-Opción 6: Guardar mascotas en archivo de disco duro (.txt o csv)
-Se solicita escribir un programa en Python que permita realizar las gestiones descritas en las opciones líneas arriba. 
-Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
-'''
 import pandas as pd
 import csv
 import random  # Importamos la librería random
@@ -53,15 +42,9 @@ def agregar_mascota():
     nombre_dueño=input("nombre del dueño: ")
     identificacion_Dni=int(input("identificacion: ")[0:8])
     list_add = [nombre_mascota,nacimiento_mascota,raza_mascota,nombre_dueño,identificacion_Dni]
-    #agregar datos al archivo CSV
-    #csvwriter_object.writerow(list_add)
     with open('registro.csv', 'a', encoding= "utf-8",newline='') as f_object:  
-    # Pass the CSV  file object to the writer() function
         writer_object = writer(f_object)
-    # Result - a writer object
-    # Pass the data in the list as an argument into the writerow() function
         writer_object.writerow(list_add)  
-    # Close the file object
         f_object.close()
 
 def buscar_mascota():
