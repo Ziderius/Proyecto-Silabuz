@@ -1,10 +1,11 @@
 import pandas as pd
 import csv
-import random  # Importamos la librería random
-import sys  #para finalizar el juego
-import time  #para definir tiempo
+from time import sleep, time
 from csv import writer
-#colores
+from datetime import datetime
+from tqdm import tqdm
+
+# Colores
 BLACK = '\033[30m'
 RED = '\033[31m'
 GREEN = '\033[32m'
@@ -14,6 +15,18 @@ MAGENTA = '\033[35m'
 CYAN = '\033[36m'
 WHITE = '\033[37m'
 RESET = '\033[39m'
+
+# Programa 
+class Veterinaria:
+    def __init__(self, reg = "registro.csv"):
+        self.reg = reg
+        self.listas = []
+        with open(self.reg, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                self.listas.append(row)
+            self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
+
 time.sleep(1)  # Espera 1 segundos antes de continuar.
 print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
 print("=== Elija una de las opciones diponibles ===\n" +RESET)
@@ -63,23 +76,7 @@ def buscar_mascota():
         else :
             print(encontrar)
 menu()
-import csv
-from datetime import datetime
-import pandas as pd
-from tqdm import tqdm
-import time
-from time import sleep
     
-# Define clase, abrir y leer csv
-class Veterinaria:
-    def __init__(self, reg = "registro.csv"):
-        self.reg = reg
-        self.listas = []
-        with open(self.reg, 'r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                self.listas.append(row)
-            self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
    
     # Menú de opciones
     def menu(self):
