@@ -113,7 +113,7 @@ class Veterinaria:
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
             buscar = input('buscar: ')
-            encontrar = archivo.query('Nombre == @buscar ')
+            encontrar = archivo.query('Nombre == @buscar')
             if encontrar.empty:
                 sleep(1.5)
                 print("No se encontraron datos.")
