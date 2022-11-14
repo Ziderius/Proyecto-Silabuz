@@ -53,7 +53,7 @@ class Veterinaria:
             if opc == 4:
                 self.buscar_mascota()
             if opc == 5:
-                self.busq()
+                self.ordern()
             if opc == 6:
                 self.guardar()
             if opc == 7:
@@ -71,20 +71,26 @@ class Veterinaria:
         for i in tqdm (range (100), desc="Cargando…", ascii=False, ncols=75):
             sleep(0.01)
         print(f"Se han cargado los datos de {mascotas} mascotas")
+        sleep(2)
         
     def mostrar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
-        print(archivo)  
+        print(archivo)
+        sleep(3)
 
     # agregar mas mascotas al archivo CSV
     def agregar_mascota(self):
         print("Necesitamos los siguientes datos de la mascota para su registro")
         nombre_mascota=input("Nombre mascota: ")
-        nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash / ): ")
+        nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash '/'): ")
         raza_mascota=input("raza Mascota: ")
         nombre_dueño=input("nombre del dueño: ")
-        identificacion_Dni=int(input("identificacion: "+RESET)[0:8])
-        list_add = [nombre_mascota,nacimiento_mascota,raza_mascota,nombre_dueño,identificacion_Dni]
+        identificacion_Dni=(input("DNI: "+RESET)[0:8])
+        while identificacion_Dni.isdigit() != True:
+            print("Solo se aceptan números hasta de 8 dígitos")
+            identificacion_Dni=(input("DNI: "+RESET)[0:8])
+
+        list_add = [nombre_mascota.capitalize(),nacimiento_mascota,raza_mascota.capitalize(),nombre_dueño.capitalize(),identificacion_Dni]
         with open('registro.csv', 'a', encoding= "utf-8",newline='') as f_object:  
             writer_object = writer(f_object)
             writer_object.writerow(list_add)  
@@ -92,25 +98,34 @@ class Veterinaria:
 
     # buscar datos de el archivo CSV
     def buscar_mascota(self):
+        sleep(1.5)
         archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
         print(MAGENTA+'''
-            ¡Bienvenido al Sistema de Registro Veterinario!
 
-            - Menú principal -
+            - Submenú de búsqueda -
             1 : Buscar nombre de mascota.
             2 : Buscar edad de mascota.
             3 : Buscar raza de la mascota.
             4 : Buscar dueño de mascota
             5 : Buscar por DNI del dueño.
             '''+ RESET)
+        sleep(1)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
+<<<<<<< HEAD
             buscar = input('buscar: ')
             encontrar = archivo.query('Nombre == @buscar ')
+=======
+            buscar = input('Buscar: ')
+            encontrar = archivo.query('Nombre == @buscar')
+>>>>>>> e286c13d37f4f4c27fc2594b816600afec76809f
             if encontrar.empty:
-                print("No se encontraron datos similares")
+                sleep(1.5)
+                print("No se encontraron datos.")
+                sleep(2.5)
             else :
                 print(encontrar)
+<<<<<<< HEAD
         if opcion_2 == 2:
             buscar = input('buscar: ')
             encontrar = archivo.query('Nacimiento == @buscar ')
@@ -139,68 +154,77 @@ class Veterinaria:
                 print("No se encontraron datos similares")
             else :
                 print(encontrar)  
+=======
+                sleep(2.5)
+        
+>>>>>>> e286c13d37f4f4c27fc2594b816600afec76809f
     # Submenú de ordenamiento por lo que el usuario requiera
-    def busq(self):
+    def ordern(self):
         datosVet = self.listas
         opc_busq = 0
         while opc_busq != 7:
             sleep(1.5)
             print(MAGENTA+'''
             - Submenú de ordenamiento del registro veterinario -
-            1 : Nombre de mascota
-            2 : Edad
-            3 : Raza
-            4 : Dueño
-            5 : DNI
+ 
+            1 : Ordenar por Nombre de mascota
+            2 : Ordenar por Edad
+            3 : Ordenar por Raza
+            4 : Ordenar por Dueño
+            5 : Ordenar por DNI
             6 : Retornar al menú principal
             7 : Salir del programa'''+RESET)
             sleep(1)
-            opc_busq = int(input("\nIngrese su opción: "))
+            opc_busq = int(input(CYAN+"\nIngrese su opción: "+RESET))
             sleep(2)
 
             if opc_busq == 1:
                 datosVet.sort(key = lambda x:x['Nombre'])
-                print(BLUE+"\nResultados del ordenamiento por Nombre de mascota: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}NOMBRE{RESET} {GREEN}de mascota: {RESET}")
                 for a in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
+                    print(f"⇢ Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
 
             if opc_busq == 2:
                 edMas = sorted(datosVet, key = lambda t: datetime.strptime(t['Nacimiento'], "%d/%m/%Y"))
-                print("\nResultados del ordenamiento por Edad de mascota: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}EDAD{RESET} {GREEN}de mascota: {RESET}")
                 for b in edMas:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {b['Nombre']} ▸ Nacimiento: {b['Nacimiento']} ▸ Raza: {b['Raza']} ▸ Dueño: {b['Dueño']} ▸ DNI: {b['DNI']}")
+                    print(f"⇢  Nombre: {b['Nombre']} ▸ Nacimiento: {b['Nacimiento']} ▸ Raza: {b['Raza']} ▸ Dueño: {b['Dueño']} ▸ DNI: {b['DNI']}")
 
             if opc_busq == 3:
                 datosVet.sort(key = lambda x:x['Raza'])
-                print("\nResultados del ordenamiento por Raza de mascota: ")                
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}RAZA{RESET} {GREEN}de mascota: {RESET}")       
                 for c in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {c['Nombre']} ▸ Nacimiento: {c['Nacimiento']} ▸ Raza: {c['Raza']} ▸ Dueño: {c['Dueño']} ▸ DNI: {c['DNI']}")
+                    print(f"⇢  Nombre: {c['Nombre']} ▸ Nacimiento: {c['Nacimiento']} ▸ Raza: {c['Raza']} ▸ Dueño: {c['Dueño']} ▸ DNI: {c['DNI']}")
             
             if opc_busq == 4:
                 datosVet.sort(key = lambda x:x['Dueño'])
-                print("\nResultados del ordenamiento por Dueño de mascota: ")                
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}DUEÑO{RESET} {GREEN}de mascota: {RESET}")         
                 for d in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {d['Nombre']} ▸ Nacimiento: {d['Nacimiento']} ▸ Raza: {d['Raza']} ▸ Dueño: {d['Dueño']} ▸ DNI: {d['DNI']}")
+                    print(f"⇢  Nombre: {d['Nombre']} ▸ Nacimiento: {d['Nacimiento']} ▸ Raza: {d['Raza']} ▸ Dueño: {d['Dueño']} ▸ DNI: {d['DNI']}")
             
             if opc_busq == 5:
                 datosVet.sort(key = lambda x:x['DNI'])
-                print("\nResultados del ordenamiento por DNI del dueño: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}DNI{RESET} {GREEN}de mascota: {RESET}")
                 for e in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {e['Nombre']} ▸ Nacimiento: {e['Nacimiento']} ▸ Raza: {e['Raza']} ▸ Dueño: {e['Dueño']} ▸ DNI: {e['DNI']}")
+                    print(f"⇢  Nombre: {e['Nombre']} ▸ Nacimiento: {e['Nacimiento']} ▸ Raza: {e['Raza']} ▸ Dueño: {e['Dueño']} ▸ DNI: {e['DNI']}")
 
             if opc_busq == 6:
+                sleep(2)
                 return self.menu()
             
             if opc_busq == 7:
+                print("¡Hasta luego, que tenga un buen día")
+                sleep(1.5)
                 self.salir()
 
         else:
             print("Elección incorrecta, vuelva a intentarlo."+RESET)
+            sleep(2)
 
     # Crear una copia del registro veterinario
     def guardar(self):
