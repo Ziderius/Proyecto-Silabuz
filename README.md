@@ -3,7 +3,7 @@
 **Trabajo aplicando POO y demás tópicos tocados en clases**
 
 Realizado por:
-* Crhistian Ángeles | Kenneth Molina | Germán Alemán
+* Crhistian Ángeles | Kenneth Molina | Germán Díaz
 
 **Contexto:**
 
