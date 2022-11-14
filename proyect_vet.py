@@ -98,20 +98,47 @@ class Veterinaria:
 
             - Menú principal -
             1 : Buscar nombre de mascota.
-            2 : Buscar dueño de mascota.
+            2 : Buscar edad de mascota.
             3 : Buscar raza de la mascota.
-            4 : Buscar edad de mascota.
+            4 : Buscar dueño de mascota
             5 : Buscar por DNI del dueño.
             '''+ RESET)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
             buscar = input('buscar: ')
-            encontrar = archivo.query('nombre == @buscar ')
+            encontrar = archivo.query('Nombre == @buscar ')
             if encontrar.empty:
                 print("No se encontraron datos similares")
             else :
                 print(encontrar)
-        
+        if opcion_2 == 2:
+            buscar = input('buscar: ')
+            encontrar = archivo.query('Nacimiento == @buscar ')
+            if encontrar.empty:
+                print("No se encontraron datos similares")
+            else :
+                print(encontrar)
+        if opcion_2 == 3:
+            buscar = input('buscar: ')
+            encontrar = archivo.query('Raza == @buscar ')
+            if encontrar.empty:
+                print("No se encontraron datos similares")
+            else :
+                print(encontrar)
+        if opcion_2 == 4:
+            buscar = input('buscar: ')
+            encontrar = archivo.query('Dueño == @buscar ')
+            if encontrar.empty:
+                print("No se encontraron datos similares")
+            else :
+                print(encontrar)
+        if opcion_2 == 1:
+            buscar = input('buscar: ')
+            encontrar = archivo.query('DNI == @buscar ')
+            if encontrar.empty:
+                print("No se encontraron datos similares")
+            else :
+                print(encontrar)  
     # Submenú de ordenamiento por lo que el usuario requiera
     def busq(self):
         datosVet = self.listas
