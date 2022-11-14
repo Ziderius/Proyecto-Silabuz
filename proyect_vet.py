@@ -31,7 +31,7 @@ class Veterinaria:
     def menu(self):
         opc = 0
         while opc != 8:
-            print('''
+            print(MAGENTA+'''
             ¡Bienvenido al Sistema de Registro Veterinario!
 
             - Menú principal -
@@ -42,8 +42,8 @@ class Veterinaria:
             5 : Ordenar registro por dato.
             6 : Guardar registro en un nuevo archivo.
             7 : Salir
-            ''')
-            opc = int(input("Introduzca su opción: "))
+            '''+ RESET)
+            opc = int(input(CYAN+ "Introduzca su opción: "+RESET))
             if opc == 1:
                 self.cargar()
             if opc == 2:
@@ -59,7 +59,7 @@ class Veterinaria:
             if opc == 7:
                 self.salir()
         else:
-            print("Elección no válida. Regresando al menú principal.")
+            print(RED+"Elección no válida. Regresando al menú principal."+RESET)
             sleep(2)
             return self.menu()
 
@@ -67,7 +67,7 @@ class Veterinaria:
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
         mascotas = pd.DataFrame(archivo)
         mascotas = len(mascotas)
-        print("Cargando datos...")
+        print(BLUE+"Cargando datos...")
         for i in tqdm (range (100), desc="Cargando…", ascii=False, ncols=75):
             sleep(0.01)
         print(f"Se han cargado los datos de {mascotas} mascotas")
@@ -83,7 +83,7 @@ class Veterinaria:
         nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash / ): ")
         raza_mascota=input("raza Mascota: ")
         nombre_dueño=input("nombre del dueño: ")
-        identificacion_Dni=int(input("identificacion: ")[0:8])
+        identificacion_Dni=int(input("identificacion: "+RESET)[0:8])
         list_add = [nombre_mascota,nacimiento_mascota,raza_mascota,nombre_dueño,identificacion_Dni]
         with open('registro.csv', 'a', encoding= "utf-8",newline='') as f_object:  
             writer_object = writer(f_object)
@@ -93,17 +93,22 @@ class Veterinaria:
     # buscar datos de el archivo CSV
     def buscar_mascota(self):
         archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
-        print("1. Buscar nombre de mascota")
-        print("2. Buscar dueño de mascota")
-        print("3. Buscar raza de la mascota")
-        print("4. Buscar edad de mascota")
-        print("5. Buscar por DNI del dueño")
+        print(MAGENTA+'''
+            ¡Bienvenido al Sistema de Registro Veterinario!
+
+            - Menú principal -
+            1 : Buscar nombre de mascota.
+            2 : Buscar dueño de mascota.
+            3 : Buscar raza de la mascota.
+            4 : Buscar edad de mascota.
+            5 : Buscar por DNI del dueño.
+            '''+ RESET)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
             buscar = input('buscar: ')
             encontrar = archivo.query('nombre == @buscar ')
             if encontrar.empty:
-                print("noup")
+                print("No se encontraron datos similares")
             else :
                 print(encontrar)
         
@@ -113,7 +118,7 @@ class Veterinaria:
         opc_busq = 0
         while opc_busq != 7:
             sleep(1.5)
-            print('''
+            print(MAGENTA+'''
             - Submenú de ordenamiento del registro veterinario -
             1 : Nombre de mascota
             2 : Edad
@@ -121,14 +126,14 @@ class Veterinaria:
             4 : Dueño
             5 : DNI
             6 : Retornar al menú principal
-            7 : Salir del programa''')
+            7 : Salir del programa'''+RESET)
             sleep(1)
             opc_busq = int(input("\nIngrese su opción: "))
             sleep(2)
 
             if opc_busq == 1:
                 datosVet.sort(key = lambda x:x['Nombre'])
-                print("\nResultados del ordenamiento por Nombre de mascota: ")
+                print(BLUE+"\nResultados del ordenamiento por Nombre de mascota: ")
                 for a in datosVet:
                     sleep(1)
                     print(f"\n⇢  Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
@@ -168,7 +173,7 @@ class Veterinaria:
                 self.salir()
 
         else:
-            print("Elección incorrecta, vuelva a intentarlo.")
+            print("Elección incorrecta, vuelva a intentarlo."+RESET)
 
     # Crear una copia del registro veterinario
     def guardar(self):
@@ -179,7 +184,7 @@ class Veterinaria:
             writer.writerows(self.listas)
         newReg.close()
         sleep(2.5)
-        print("\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv")
+        print(YELLOW"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv"+RESET)
         sleep(1)
 
     # Opción de salir del programa 
