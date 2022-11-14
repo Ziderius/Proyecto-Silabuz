@@ -184,8 +184,8 @@ class Veterinaria:
             writer.writerows(self.listas)
         newReg.close()
         sleep(2.5)
-        print(YELLOW+"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv" +RESET)
-        sleep(2.5)
+        print(YELLOW+"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv"+RESET)
+        sleep(1)
 
     # Opción de salir del programa 
     def salir(self):
