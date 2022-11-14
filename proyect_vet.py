@@ -68,45 +68,18 @@ def agregar_mascota():
         f_object.close()
       
 def buscar_mascota():
+    archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
     print("1. Buscar nombre de mascota")
     print("2. Buscar dueño de mascota")
     print("3. Buscar raza de la mascota")
     print("4. Buscar edad de mascota")
     print("5. Buscar por DNI del dueño")
-    #opcion_2 = int(input("Elija una opcion correcta: "))
-    archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
-    ingresar = input('buscar: ')
-    encontrar = archivo.query('nombre == @buscar ')
-    if encontrar.empty:
-        print("noup")
-    else :
-        print(encontrar)
+    opcion_2 = int(input("Elija una opcion correcta: "))
+    if opcion_2 == 1:
+        buscar = input('buscar: ')
+        encontrar = archivo.query('nombre == @buscar ')
+        if encontrar.empty:
+            print("noup")
+        else :
+            print(encontrar)
 menu()
-'''
-    if opcion_2 ==1:
-        with open("registro.csv", encoding = "utf-8") as f:
-            archivo = csv.reader(f)
-            for linea in archivo:
-                print (linea[0])
-    if opcion_2 ==2:
-        with open("registro.csv", encoding = "utf-8") as f:
-            archivo = csv.reader(f)
-            for linea in archivo:
-                print (linea[1])
-    if opcion_2 ==3:
-        with open("registro.csv", encoding = "utf-8") as f:
-            archivo = csv.reader(f)
-            for linea in archivo:
-                print (linea[2])
-    if opcion_2 ==4:
-        with open("registro.csv", encoding = "utf-8") as f:
-            archivo = csv.reader(f)
-            for linea in archivo:
-                print (linea[3])
-    if opcion_2 ==5:
-        with open("registro.csv", encoding = "utf-8") as f:
-            archivo = csv.reader(f)
-            for linea in archivo:
-                print (linea[4])
-menu()
-'''
