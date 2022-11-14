@@ -1,7 +1,9 @@
-
 import csv
 from datetime import datetime
+import pandas as pd
+from tqdm import tqdm
 import time
+from time import sleep
     
 # Define clase, abrir y leer csv
 class Veterinaria:
@@ -36,7 +38,23 @@ class Veterinaria:
             print("Elección no válida. Intente de nuevo.")
             time.sleep(2) 
             return self.menu()
+            
+     def cargar(self):
+        archivo = pd.read_csv("registro.csv", encoding='utf-8')
+        mascotas = pd.DataFrame(archivo)
+        mascotas = len(mascotas)
+        
+        print("Cargando datos...")
 
+        for i in tqdm (range (100), desc="Cargando…", ascii=False, ncols=75):
+            sleep(0.01)
+
+        print(f"Se han cargado los datos de {mascotas} mascotas")
+        
+      def mostrar(self):
+        archivo = pd.read_csv("registro.csv", encoding='utf-8')
+        print(archivo)  
+        
     # Submenú de ordenamiento por lo que el usuario requiera
     def busq(self):
         datosVet = self.listas
