@@ -12,6 +12,8 @@ Se solicita escribir un programa en Python que permita realizar las gestiones de
 Para ello, se debe utilizar: colecciones (listas, tuplas, etc), funciones y clases de Python. 
 
 '''
+import pandas as pd
+import csv
 import random  # Importamos la librería random
 import sys  #para finalizar el juego
 import time  #para definir tiempo
@@ -41,9 +43,10 @@ def menu():
     while opcion not in (1,2,3,4,5,6):
             opcion = input("la opcion no existe, elija una opcion correcta: ")
     if opcion == 3:
-       agregar_mascota()
+        agregar_mascota()
     if opcion == 4:
         buscar_mascota()
+
 def agregar_mascota():
     print("Necesitamos los siguientes datos de la mascota para su registro")
     nombre_mascota=input("Nombre mascota: ")
@@ -63,76 +66,47 @@ def agregar_mascota():
         writer_object.writerow(list_add)  
     # Close the file object
         f_object.close()
+      
 def buscar_mascota():
     print("1. Buscar nombre de mascota")
     print("2. Buscar dueño de mascota")
     print("3. Buscar raza de la mascota")
     print("4. Buscar edad de mascota")
     print("5. Buscar por DNI del dueño")
-    if opcion==1:
-    
-    if opcion==2:
-        
-    if opcion==3:
-        
-    if opcion==4:
-        
-    if ordenar==5:
-
+    #opcion_2 = int(input("Elija una opcion correcta: "))
+    archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
+    ingresar = input('buscar: ')
+    encontrar = archivo.query('nombre == @buscar ')
+    if encontrar.empty:
+        print("noup")
+    else :
+        print(encontrar)
+menu()
 '''
-Opción 4: Buscar mascota. Al seleccionar esta opción, el sistema indicar subopciones de búsqueda como: nombre mascota, 
-dueño, raza, edad o DNI. Acorde a la opción y valor ingresado se debe mostrar las mascotas que cumplen dichos criterios.
-
-'''
-
-    
-
-
- 
-'''
-    if opcion==1:
-        carga()
-
-    if opcion==2:
-        mostrar()
-    if opcion==3:
-        agregar()
-    if opcion==4:
-        buscar()
-    if ordenar==5:
-        cargar()
-    elif opcion==6:
-        guardar(datos)
-def carga():
-    datos={}
-    continua="s"
-    while continua=="s":
-        legajos=int(input("ingrese numero de legajo"))
-        
-        nombre=input("ingrese nombre del empleado")
-        profesion=input("ingrese puesto /area/profesion")
-        sueldo=int(input("ingrese sueldo del empleado"))
-        datos[legajos]=[nombre,profesion,sueldo]
-        continua=input("desea agregar otro empleado?")
-        if continua!="s":
-            menu()      
-    return(datos)
-   
-
-def mostrar():
-    
-def agregar():
-    
-def buscar():
-    
-def cargar():
-    
-def guardar():
-
-
-def modicar(datos):
-    legajo=int(input("ingrese numero de legajo a seleccionar"))
-    if legajo in datos:
-        sueldo=int(input("ingrese el nuevo sueldo"))
-        datos[2]=sueldo
+    if opcion_2 ==1:
+        with open("registro.csv", encoding = "utf-8") as f:
+            archivo = csv.reader(f)
+            for linea in archivo:
+                print (linea[0])
+    if opcion_2 ==2:
+        with open("registro.csv", encoding = "utf-8") as f:
+            archivo = csv.reader(f)
+            for linea in archivo:
+                print (linea[1])
+    if opcion_2 ==3:
+        with open("registro.csv", encoding = "utf-8") as f:
+            archivo = csv.reader(f)
+            for linea in archivo:
+                print (linea[2])
+    if opcion_2 ==4:
+        with open("registro.csv", encoding = "utf-8") as f:
+            archivo = csv.reader(f)
+            for linea in archivo:
+                print (linea[3])
+    if opcion_2 ==5:
+        with open("registro.csv", encoding = "utf-8") as f:
+            archivo = csv.reader(f)
+            for linea in archivo:
+                print (linea[4])
+menu()
 '''
