@@ -29,27 +29,11 @@ class Veterinaria:
                 self.listas.append(row)
             self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
 >>>>>>> b413c384a7cb1f7a4ea95f41ad05d9f4fd7d082c
-
+    # Menú de opciones
     time.sleep(1)  # Espera 1 segundos antes de continuar.
     print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
     print("=== Elija una de las opciones diponibles ===\n" +RESET)
-    time.sleep(1)  # Espera 1 segundos antes de continuar.
-    def menu():
-        print(YELLOW+ "presione 1 para  cargar datos de su mascota ")
-        print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
-        print("presione 3 para agregar mascota")
-        print("presione 4 para buscar mascota")
-        print("presione 5 para ordenar mascota")
-        print("presione 6 para guardar mascotas \n" +RESET)
-    opcion = int(input("Elija una opcion correcta: "))
-    while opcion not in (1,2,3,4,5,6):
-            opcion = input("la opcion no existe, elija una opcion correcta: ")
-    if opcion == 3:
-        agregar_mascota()
-    if opcion == 4:
-        buscar_mascota()
-
-    # Menú de opciones
+    time.sleep(1)  # Espera 1 segundos antes de continuar.  
     def menu(self):
         opc = 0
         while opc != 8:
@@ -61,6 +45,11 @@ class Veterinaria:
             ''')
             time.sleep(0)
             opc = int(input("Introduzca su opción: "))
+
+            if opcion == 3:
+                agregar_mascota()
+            if opcion == 4:
+                buscar_mascota()
             if opc == 5:
                 self.busq()
             if opc == 6:
