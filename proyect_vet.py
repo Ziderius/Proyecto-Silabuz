@@ -16,8 +16,6 @@ CYAN = '\033[36m'
 WHITE = '\033[37m'
 RESET = '\033[39m'
 
-<<<<<<< HEAD
-=======
 # Programa 
 class Veterinaria:
     def __init__(self, reg = "registro.csv"):
@@ -28,67 +26,25 @@ class Veterinaria:
             for row in reader:
                 self.listas.append(row)
             self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
->>>>>>> b413c384a7cb1f7a4ea95f41ad05d9f4fd7d082c
 
-    time.sleep(1)  # Espera 1 segundos antes de continuar.
-    print(CYAN +"=== Bienvenido la veterinaria Kolitas=== ")
-    print("=== Elija una de las opciones diponibles ===\n" +RESET)
-    time.sleep(1)  # Espera 1 segundos antes de continuar.
-    def menu():
-        print(YELLOW+ "presione 1 para  cargar datos de su mascota ")
-        print("presione 2 para mostrar los datos de mascotas cargadas en el sistema")
-        print("presione 3 para agregar mascota")
-        print("presione 4 para buscar mascota")
-        print("presione 5 para ordenar mascota")
-        print("presione 6 para guardar mascotas \n" +RESET)
-    opcion = int(input("Elija una opcion correcta: "))
-    while opcion not in (1,2,3,4,5,6):
-            opcion = input("la opcion no existe, elija una opcion correcta: ")
-    if opcion == 3:
-        agregar_mascota()
-    if opcion == 4:
-        buscar_mascota()
-
-    # Menú de opciones
     def menu(self):
-        opc = 0
-        while opc != 8:
-            print('''
-            ¡Bienvenido al Sistema de Registro Veterinario!
-            5 : Ordenar mascotas por datos de registro.
-            6 : Crear una copia del registro.
-            7 : Salir. 
-            ''')
-            time.sleep(0)
-            opc = int(input("Introduzca su opción: "))
-            if opc == 5:
-                self.busq()
-            if opc == 6:
-                self.guardar()
-            if opc == 7:
-                self.salir()
-        else:
-            print("Elección no válida. Intente de nuevo.")
-            time.sleep(2) 
-            return self.menu()
-            
+        
+    
     def cargar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
         mascotas = pd.DataFrame(archivo)
         mascotas = len(mascotas)
-        
         print("Cargando datos...")
-
         for i in tqdm (range (100), desc="Cargando…", ascii=False, ncols=75):
             sleep(0.01)
-
         print(f"Se han cargado los datos de {mascotas} mascotas")
         
     def mostrar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
         print(archivo)  
     # agregar mas mascotas al archivo CSV
-    def agregar_mascota():
+
+    def agregar_mascota(self):
         print("Necesitamos los siguientes datos de la mascota para su registro")
         nombre_mascota=input("Nombre mascota: ")
         nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento"
@@ -101,8 +57,9 @@ class Veterinaria:
             writer_object = writer(f_object)
             writer_object.writerow(list_add)  
             f_object.close()
+
     # buscar datos de el archivo CSV
-    def buscar_mascota():
+    def buscar_mascota(self):
         archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
         print("1. Buscar nombre de mascota")
         print("2. Buscar dueño de mascota")
