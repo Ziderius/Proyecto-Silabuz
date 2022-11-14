@@ -51,7 +51,7 @@ class Veterinaria:
             if opc == 3:
                 self.agregar_mascota()
             if opc == 4:
-                self.agregar_mascota()
+                self.buscar_mascota()
             if opc == 5:
                 self.busq()
             if opc == 6:
@@ -184,7 +184,7 @@ class Veterinaria:
             writer.writerows(self.listas)
         newReg.close()
         sleep(2.5)
-        print(YELLOW"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv"+RESET)
+        print(YELLOW+"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv"+RESET)
         sleep(1)
 
     # Opción de salir del programa 
