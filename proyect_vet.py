@@ -27,9 +27,10 @@ class Veterinaria:
                 self.listas.append(row)
             self.fieldnames = ['Nombre', 'Nacimiento', 'Raza', 'Dueño', 'DNI']
 
+    # Menú de opciones
     def menu(self):
-        
-    
+
+
     def cargar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
         mascotas = pd.DataFrame(archivo)
@@ -42,8 +43,8 @@ class Veterinaria:
     def mostrar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
         print(archivo)  
-    # agregar mas mascotas al archivo CSV
 
+    # agregar mas mascotas al archivo CSV
     def agregar_mascota(self):
         print("Necesitamos los siguientes datos de la mascota para su registro")
         nombre_mascota=input("Nombre mascota: ")
