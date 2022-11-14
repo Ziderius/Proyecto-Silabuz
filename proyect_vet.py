@@ -71,10 +71,12 @@ class Veterinaria:
         for i in tqdm (range (100), desc="Cargando…", ascii=False, ncols=75):
             sleep(0.01)
         print(f"Se han cargado los datos de {mascotas} mascotas")
+        sleep(2)
         
     def mostrar(self):
         archivo = pd.read_csv("registro.csv", encoding='utf-8')
-        print(archivo)  
+        print(archivo)
+        sleep(3)
 
     # agregar mas mascotas al archivo CSV
     def agregar_mascota(self):
@@ -83,8 +85,12 @@ class Veterinaria:
         nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash '/'): ")
         raza_mascota=input("raza Mascota: ")
         nombre_dueño=input("nombre del dueño: ")
-        identificacion_Dni=int(input("identificacion: "+RESET)[0:8])
-        list_add = [nombre_mascota,nacimiento_mascota,raza_mascota,nombre_dueño,identificacion_Dni]
+        identificacion_Dni=(input("DNI: "+RESET)[0:8])
+        while identificacion_Dni.isdigit() != True:
+            print("Solo se aceptan números hasta de 8 dígitos")
+            identificacion_Dni=(input("DNI: "+RESET)[0:8])
+
+        list_add = [nombre_mascota.capitalize(),nacimiento_mascota,raza_mascota.capitalize(),nombre_dueño.capitalize(),identificacion_Dni]
         with open('registro.csv', 'a', encoding= "utf-8",newline='') as f_object:  
             writer_object = writer(f_object)
             writer_object.writerow(list_add)  
@@ -92,6 +98,7 @@ class Veterinaria:
 
     # buscar datos de el archivo CSV
     def buscar_mascota(self):
+        sleep(1.5)
         archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
         print(MAGENTA+'''
 
@@ -102,14 +109,18 @@ class Veterinaria:
             4 : Buscar edad de mascota.
             5 : Buscar por DNI del dueño.
             '''+ RESET)
+        sleep(1)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
             buscar = input('Buscar: ')
             encontrar = archivo.query('Nombre == @buscar')
             if encontrar.empty:
+                sleep(1.5)
                 print("No se encontraron datos.")
+                sleep(2.5)
             else :
                 print(encontrar)
+                sleep(2.5)
         
     # Submenú de ordenamiento por lo que el usuario requiera
     def ordern(self):
@@ -119,11 +130,12 @@ class Veterinaria:
             sleep(1.5)
             print(MAGENTA+'''
             - Submenú de ordenamiento del registro veterinario -
-            1 : Nombre de mascota
-            2 : Edad
-            3 : Raza
-            4 : Dueño
-            5 : DNI
+ 
+            1 : Ordenar por Nombre de mascota
+            2 : Ordenar por Edad
+            3 : Ordenar por Raza
+            4 : Ordenar por Dueño
+            5 : Ordenar por DNI
             6 : Retornar al menú principal
             7 : Salir del programa'''+RESET)
             sleep(1)
@@ -166,9 +178,12 @@ class Veterinaria:
                     print(f"⇢  Nombre: {e['Nombre']} ▸ Nacimiento: {e['Nacimiento']} ▸ Raza: {e['Raza']} ▸ Dueño: {e['Dueño']} ▸ DNI: {e['DNI']}")
 
             if opc_busq == 6:
+                sleep(2)
                 return self.menu()
             
             if opc_busq == 7:
+                print("¡Hasta luego, que tenga un buen día")
+                sleep(1.5)
                 self.salir()
 
         else:
