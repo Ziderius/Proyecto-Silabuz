@@ -51,9 +51,9 @@ class Veterinaria:
             if opc == 3:
                 self.agregar_mascota()
             if opc == 4:
-                self.agregar_mascota()
+                self.buscar_mascota()
             if opc == 5:
-                self.busq()
+                self.ordern()
             if opc == 6:
                 self.guardar()
             if opc == 7:
@@ -80,7 +80,7 @@ class Veterinaria:
     def agregar_mascota(self):
         print("Necesitamos los siguientes datos de la mascota para su registro")
         nombre_mascota=input("Nombre mascota: ")
-        nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash / ): ")
+        nacimiento_mascota=input("Ingrese Dia, Mes y Año de nacimiento (Separados por un guion slash '/'): ")
         raza_mascota=input("raza Mascota: ")
         nombre_dueño=input("nombre del dueño: ")
         identificacion_Dni=int(input("identificacion: "+RESET)[0:8])
@@ -94,9 +94,8 @@ class Veterinaria:
     def buscar_mascota(self):
         archivo = pd.read_csv('registro.csv', encoding = 'utf-8')
         print(MAGENTA+'''
-            ¡Bienvenido al Sistema de Registro Veterinario!
 
-            - Menú principal -
+            - Submenú de búsqueda -
             1 : Buscar nombre de mascota.
             2 : Buscar dueño de mascota.
             3 : Buscar raza de la mascota.
@@ -105,15 +104,15 @@ class Veterinaria:
             '''+ RESET)
         opcion_2 = int(input("Elija una opcion correcta: "))
         if opcion_2 == 1:
-            buscar = input('buscar: ')
-            encontrar = archivo.query('nombre == @buscar ')
+            buscar = input('Buscar: ')
+            encontrar = archivo.query('Nombre == @buscar')
             if encontrar.empty:
-                print("No se encontraron datos similares")
+                print("No se encontraron datos.")
             else :
                 print(encontrar)
         
     # Submenú de ordenamiento por lo que el usuario requiera
-    def busq(self):
+    def ordern(self):
         datosVet = self.listas
         opc_busq = 0
         while opc_busq != 7:
@@ -128,43 +127,43 @@ class Veterinaria:
             6 : Retornar al menú principal
             7 : Salir del programa'''+RESET)
             sleep(1)
-            opc_busq = int(input("\nIngrese su opción: "))
+            opc_busq = int(input(CYAN+"\nIngrese su opción: "+RESET))
             sleep(2)
 
             if opc_busq == 1:
                 datosVet.sort(key = lambda x:x['Nombre'])
-                print(BLUE+"\nResultados del ordenamiento por Nombre de mascota: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}NOMBRE{RESET} {GREEN}de mascota: {RESET}")
                 for a in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
+                    print(f"⇢ Nombre: {a['Nombre']} ▸ Nacimiento: {a['Nacimiento']} ▸ Raza: {a['Raza']} ▸ Dueño: {a['Dueño']} ▸ DNI: {a['DNI']}")
 
             if opc_busq == 2:
                 edMas = sorted(datosVet, key = lambda t: datetime.strptime(t['Nacimiento'], "%d/%m/%Y"))
-                print("\nResultados del ordenamiento por Edad de mascota: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}EDAD{RESET} {GREEN}de mascota: {RESET}")
                 for b in edMas:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {b['Nombre']} ▸ Nacimiento: {b['Nacimiento']} ▸ Raza: {b['Raza']} ▸ Dueño: {b['Dueño']} ▸ DNI: {b['DNI']}")
+                    print(f"⇢  Nombre: {b['Nombre']} ▸ Nacimiento: {b['Nacimiento']} ▸ Raza: {b['Raza']} ▸ Dueño: {b['Dueño']} ▸ DNI: {b['DNI']}")
 
             if opc_busq == 3:
                 datosVet.sort(key = lambda x:x['Raza'])
-                print("\nResultados del ordenamiento por Raza de mascota: ")                
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}RAZA{RESET} {GREEN}de mascota: {RESET}")       
                 for c in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {c['Nombre']} ▸ Nacimiento: {c['Nacimiento']} ▸ Raza: {c['Raza']} ▸ Dueño: {c['Dueño']} ▸ DNI: {c['DNI']}")
+                    print(f"⇢  Nombre: {c['Nombre']} ▸ Nacimiento: {c['Nacimiento']} ▸ Raza: {c['Raza']} ▸ Dueño: {c['Dueño']} ▸ DNI: {c['DNI']}")
             
             if opc_busq == 4:
                 datosVet.sort(key = lambda x:x['Dueño'])
-                print("\nResultados del ordenamiento por Dueño de mascota: ")                
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}DUEÑO{RESET} {GREEN}de mascota: {RESET}")         
                 for d in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {d['Nombre']} ▸ Nacimiento: {d['Nacimiento']} ▸ Raza: {d['Raza']} ▸ Dueño: {d['Dueño']} ▸ DNI: {d['DNI']}")
+                    print(f"⇢  Nombre: {d['Nombre']} ▸ Nacimiento: {d['Nacimiento']} ▸ Raza: {d['Raza']} ▸ Dueño: {d['Dueño']} ▸ DNI: {d['DNI']}")
             
             if opc_busq == 5:
                 datosVet.sort(key = lambda x:x['DNI'])
-                print("\nResultados del ordenamiento por DNI del dueño: ")
+                print(f"\n{GREEN}Resultados del ordenamiento por {YELLOW}DNI{RESET} {GREEN}de mascota: {RESET}")
                 for e in datosVet:
                     sleep(1)
-                    print(f"\n⇢  Nombre: {e['Nombre']} ▸ Nacimiento: {e['Nacimiento']} ▸ Raza: {e['Raza']} ▸ Dueño: {e['Dueño']} ▸ DNI: {e['DNI']}")
+                    print(f"⇢  Nombre: {e['Nombre']} ▸ Nacimiento: {e['Nacimiento']} ▸ Raza: {e['Raza']} ▸ Dueño: {e['Dueño']} ▸ DNI: {e['DNI']}")
 
             if opc_busq == 6:
                 return self.menu()
@@ -174,6 +173,7 @@ class Veterinaria:
 
         else:
             print("Elección incorrecta, vuelva a intentarlo."+RESET)
+            sleep(2)
 
     # Crear una copia del registro veterinario
     def guardar(self):
@@ -184,8 +184,8 @@ class Veterinaria:
             writer.writerows(self.listas)
         newReg.close()
         sleep(2.5)
-        print(YELLOW"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv"+RESET)
-        sleep(1)
+        print(YELLOW+"\nSe ha creado un nuevo registro en el sistema con nombre registro_2.csv" +RESET)
+        sleep(2.5)
 
     # Opción de salir del programa 
     def salir(self):
