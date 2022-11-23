@@ -141,7 +141,7 @@ class Veterinaria:
                 print("No se encontraron datos similares")
             else :
                 print(encontrar)
-        if opcion_2 == 1:
+        if opcion_2 == 5:
             buscar = input('buscar: ')
             encontrar = archivo.query('DNI == @buscar ')
             if encontrar.empty:
